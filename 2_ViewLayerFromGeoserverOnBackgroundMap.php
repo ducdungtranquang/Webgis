@@ -233,7 +233,7 @@
         };
     </script>
 
-    <script>
+    <!-- <script>
         var modal = document.getElementById("myModal");
 
         // Get the button that opens the modal
@@ -272,7 +272,7 @@
         mapELement.addEventListener('mouseleave', () => {
             toolTip.classList.add("hide_tool_tips");
         })
-    </script>
+    </script> -->
 </body>
 
 </html>

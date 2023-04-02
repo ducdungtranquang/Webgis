@@ -19,10 +19,173 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>
 
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-image: url("./Screen\ Shot\ 2023-03-31\ at\ 09.50.54.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+
+        .header {
+            font-family: 'Dancing Script', cursive;
+            font-size: 80px;
+            text-align: center;
+            color: rgb(124, 124, 17);
+            font-weight: 700;
+            background: rgba(255, 255, 255, .55);
+            /* border-radius: 8px; */
+            box-shadow: 0px 10px rgba(0, 0, 0, .2);
+            margin-top: 10px;
+        }
+
+        .ban-do {
+            height: 60vh;
+            background-color: white;
+            box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, .2);
+        }
+
+        .ban-do-app {
+            width: 60%;
+            background-color: white;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        .input-group {
+            height: 30px;
+        }
+
+        .input-group input {
+            font-size: 24px;
+
+        }
+
+        .input-group button {
+            font-size: 30px;
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+            min-height:200px ;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            margin-top: 50px;
+        }
+
+        #map :hover {
+            cursor: pointer;
+        }
+
+        .tool_tip {
+            position: absolute;
+            z-index: 100;
+            display: block;
+            background-color: #000;
+            color: #fefefe;
+            padding: 12px;
+            border-radius: 3px;
+            /* top: 10px;
+left: 50%; */
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .hide_tool_tips {
+            display: none;
+        }
+
+        .treasure-chest {}
+
+        .treasure-chest img {
+            position: absolute;
+            display: block;
+            width: 10%;
+            bottom: 0;
+        }
+
+        .light img {
+            position: absolute;
+            display: block;
+            width: 5%;
+            top: 100;
+            right: -10px;
+        }
+
+        .instruct {
+            font-size: 30px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .instruct-conten {
+            font-weight: 500;
+            font-size:24px;
+        }
+    </style>
     <!-- <script src="http://localhost:8081/libs/jquery/jquery-3.4.1.min.js" type="text/javascript"></script> -->
 </head>
 
-<body onload="initialize_map();">
+<body>
     <div class="app">
         <div class="header">Giang Sơn Map</div>
         <div class="ban-do-app" style=" border: 3px solid black;
@@ -41,72 +204,78 @@
                 </div>
             </div>
         </div>
+        <div class="light">
+            <img src="./—Pngtree—yellow creative bulb team idea_3847872.png" alt="">
+        </div>
+        <div class="treasure-chest">
+            <img src="./—Pngtree—golden brown shiny treasure chest_6042838.png" alt="">
+        </div>
     </div>
     <div id="myModal" class="modal">
 
-<!-- Modal content -->
-<div class="modal-content">
-    <p class="instruct">Hướng dẫn chơi</p>
-    <p class="instruct-conten">
-        1. Xác định khu vực cụ thể bạn muốn tìm kiếm bí kíp, có thể là một thành phố, một tỉnh hoặc một khu vực
-        nhất định. <br />
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p class="instruct">Hướng dẫn chơi</p>
+            <p class="instruct-conten">
+                1. Xác định khu vực cụ thể bạn muốn tìm kiếm bí kíp, có thể là một thành phố, một tỉnh hoặc một khu vực
+                nhất định. <br />
 
-        2. Sử dụng chức năng tìm kiếm để nhập tên xã/phường hoặc tên tỉnh/thành phố vào ô tìm kiếm.<br />
+                2. Sử dụng chức năng tìm kiếm để nhập tên xã/phường hoặc tên tỉnh/thành phố vào ô tìm kiếm.<br />
 
-        3. Khi tìm thấy vị trí đúng, bạn có thể phóng to bản đồ để xác định vị trí chính xác hơn.<br />
+                3. Khi tìm thấy vị trí đúng, bạn có thể phóng to bản đồ để xác định vị trí chính xác hơn.<br />
 
-        4. Khi đã tìm được bí kíp, bạn có thể giấu nó bằng cách click vào rương bên dưới và viết một câu chuyện
-        dài
-        và hấp dẫn để thúc đẩy người khác tìm kiếm bí kíp của bạn. Hãy đảm bảo giữ bí kíp ở vị trí an toàn và
-        không để lộ cho người khác biết.<br />
-    </p>
-</div>
-<div id="modalPassword" class="modal">
+                4. Khi đã tìm được bí kíp, bạn có thể giấu nó bằng cách click vào rương bên dưới và viết một câu chuyện
+                dài
+                và hấp dẫn để thúc đẩy người khác tìm kiếm bí kíp của bạn. Hãy đảm bảo giữ bí kíp ở vị trí an toàn và
+                không để lộ cho người khác biết.<br />
+            </p>
+        </div>
 
-<!-- Modal content -->
-<div class="modal-content">
-    <p class="instruct">Hướng dẫn chơi</p>
-    <p class="instruct-conten">
-        xin vui lòng cài mật khẩu
-    </p>
-    <div class="input-group">
-        <input id="password" type="Password" class="form-control rounded" placeholder="Password"
-            aria-label="Password" aria-describedby="search-addon" />
-        <button id="savePass" type="button" class="btn btn-outline-primary">Save</button>
     </div>
-</div>
+    <div id="modalPassword" class="modal">
 
-</div>
-<div id="modalEnterPass" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p class="instruct">Hướng dẫn chơi</p>
+            <p class="instruct-conten">
+                xin vui lòng cài mật khẩu
+            </p>
+            <div class="input-group">
+                <input id="password" type="Password" class="form-control rounded" placeholder="Password" aria-label="Password" aria-describedby="search-addon" />
+                <button id="savePass" type="button" class="btn btn-outline-primary">Save</button>
+            </div>
+        </div>
 
-<!-- Modal content -->
-<div class="modal-content">
-    <p class="instruct">Hướng dẫn chơi</p>
-    <p class="instruct-conten">
-        xin vui lòng nhập mật khẩu
-    </p>
-    <div class="input-group">
-        <input id="enterPassword" type="Password" class="form-control rounded" placeholder="Password"
-            aria-label="Password" aria-describedby="search-addon" />
-        <button id="sendPass" type="button" class="btn btn-outline-primary">Save</button>
     </div>
-</div>
+    <div id="modalEnterPass" class="modal">
 
-</div>
-<div id="modalBiKip" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p class="instruct">Hướng dẫn chơi</p>
+            <p class="instruct-conten">
+                xin vui lòng nhập mật khẩu
+            </p>
+            <div class="input-group">
+                <input id="enterPassword" type="Password" class="form-control rounded" placeholder="Password" aria-label="Password" aria-describedby="search-addon" />
+                <button id="sendPass" type="button" class="btn btn-outline-primary">Save</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="modalBiKip" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <p class="instruct">Bí Kíp</p>
             <p class="instruct-conten">
-               quyển 1
+                quyển 1
             </p>
             <p class="instruct-conten">
                 quyển 2
-             </p>
+            </p>
         </div>
 
     </div>
-</div>
+
     <?php include 'CMR_pgsqlAPI.php' ?>
     <?php
     //$myPDO = initDB();
@@ -121,7 +290,11 @@
     //closeDB($myPDO);
     ?>
     <script type="module">
-        import {initialize_map,valueSearch, handleSearch} from './query.js'
+        import {
+            initialize_map,
+            valueSearch,
+            handleSearch
+        } from './query.js'
         var format = 'image/png';
         var map;
         var minX = 102.107955932617;
@@ -134,179 +307,11 @@
         var mapLng = cenX;
         var mapDefaultZoom = 6;
         const location = "tp";
-        
-        initialize_map(format, map, mapLat, mapLng, mapDefaultZoom, valueSearch );
 
-        // function initialize_map() {
-        //     //*
-        //     layerBG = new ol.layer.Tile({
-        //         source: new ol.source.OSM({})
-        //     });
-        //     //*/
-        //     var layerCMR_adm1 = new ol.layer.Image({
-        //         source: new ol.source.ImageWMS({
-        //             ratio: 1,
-        //             url: 'http://localhost:8080/geoserver/vietnam/wms?service=WMS&version=1.1.0&request=GetMap&layers=vietnam%3Agadm41_vnm_1&bbox=102.107955932617%2C8.30629730224609%2C109.505798339844%2C23.4677505493164&width=374&height=768&srs=EPSG%3A4326&styles=&format=application/openlayers',
-        //             params: {
-        //                 'FORMAT': format,
-        //                 'VERSION': '1.1.1',
-        //                 STYLES: '',
-        //                 LAYERS: 'vietnam:gadm41_vnm_1',
-        //             }
-        //         })
-        //     });
-        //     var viewMap = new ol.View({
-        //         center: ol.proj.fromLonLat([mapLng, mapLat]),
-        //         zoom: mapDefaultZoom
-        //         //projection: projection
-        //     });
-        //     map = new ol.Map({
-        //         target: "map",
-        //         layers: [layerBG, layerCMR_adm1],
-        //         //layers: [layerCMR_adm1],
-        //         view: viewMap
-        //     });
-        //     //map.getView().fit(bounds, map.getSize());
-
-        //     var styles = {
-        //         'MultiPolygon': new ol.style.Style({
-        //             fill: new ol.style.Fill({
-        //                 color: 'orange'
-        //             }),
-        //             stroke: new ol.style.Stroke({
-        //                 color: 'yellow',
-        //                 width: 2
-        //             })
-        //         })
-        //     };
-        //     var styleFunction = function(feature) {
-        //         return styles[feature.getGeometry().getType()];
-        //     };
-        //     var vectorLayer = new ol.layer.Vector({
-        //         //source: vectorSource,
-        //         style: styleFunction
-        //     });
-        //     map.addLayer(vectorLayer);
-
-        //     function createJsonObj(result) {
-        //         var geojsonObject = '{' +
-        //             '"type": "FeatureCollection",' +
-        //             '"crs": {' +
-        //             '"type": "name",' +
-        //             '"properties": {' +
-        //             '"name": "EPSG:4326"' +
-        //             '}' +
-        //             '},' +
-        //             '"features": [{' +
-        //             '"type": "Feature",' +
-        //             '"geometry": ' + result +
-        //             '}]' +
-        //             '}';
-        //         return geojsonObject;
-        //     }
-
-        //     function drawGeoJsonObj(paObjJson) {
-        //         var vectorSource = new ol.source.Vector({
-        //             features: (new ol.format.GeoJSON()).readFeatures(paObjJson, {
-        //                 dataProjection: 'EPSG:4326',
-        //                 featureProjection: 'EPSG:3857'
-        //             })
-        //         });
-        //         var vectorLayer = new ol.layer.Vector({
-        //             source: vectorSource
-        //         });
-        //         map.addLayer(vectorLayer);
-        //     }
-
-        //     function highLightGeoJsonObj(paObjJson) {
-        //         var vectorSource = new ol.source.Vector({
-        //             features: (new ol.format.GeoJSON()).readFeatures(paObjJson, {
-        //                 dataProjection: 'EPSG:4326',
-        //                 featureProjection: 'EPSG:3857'
-        //             })
-        //         });
-        //         vectorLayer.setSource(vectorSource);
-        //         /*
-        //         var vectorLayer = new ol.layer.Vector({
-        //             source: vectorSource
-        //         });
-        //         map.addLayer(vectorLayer);
-        //         */
-        //     }
-
-        //     function highLightObj(result) {
-        //         let data = JSON.parse(result);
-        //         // console.log(data);
-        //         var strObjJson = createJsonObj(data[0]['geo']);
-        //         var objJson = JSON.parse(strObjJson);
-        //         //alert(JSON.stringify(objJson));
-        //         //drawGeoJsonObj(objJson);
-        //         highLightGeoJsonObj(strObjJson);
-        //     }
-
-        //     function pop_up_inform(result){
-        //         let data = JSON.parse(result);
-        //         document.getElementById("myModal").style.display = "block";
-        //         document.getElementById("myModal").innerHTML =data[0]['name_1'] ;
-        //     }
-        //     map.on('singleclick', async function(evt) {
-        //         // alert("coordinate: " + evt.coordinate);z
-        //         //var myPoint = 'POINT(12,5)';
-        //         var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-        //         var lon = lonlat[0];
-        //         var lat = lonlat[1];
-        //         var myPoint = 'POINT(' + lon + ' ' + lat + ')';
-                
-        //          $.ajax({
-        //             type: "POST",
-        //             url: "CMR_pgsqlAPI.php",
-        //             //dataType: 'json',
-        //             data: {
-        //                 functionname: 'getGeoCMRToAjax',
-        //                 paPoint: myPoint
-        //             },
-        //             success: function(result, status, erro) {
-        //                 highLightObj(result);
-        //                 pop_up_inform(result)
-        //                 // alert(result)
-        //                 console.log(result);
-        //             },
-        //             error: function(req, status, error) {
-        //                 alert(req + " " + status + " " + error);
-        //             }
-        //         });
-        //         //*/
-        //     });
-
-        //     // map.on('pointermove', function(evt) {
-        //     //     // alert("coordinate: " + evt.coordinate);
-        //     //     //var myPoint = 'POINT(12,5)';
-        //     //     var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-        //     //     var lon = lonlat[0];
-        //     //     var lat = lonlat[1];
-        //     //     var myPoint = 'POINT(' + lon + ' ' + lat + ')';
-        //     //     //alert("myPoint: " + myPoint);
-        //     //     //*
-        //     //     $.ajax({
-        //     //         type: "POST",
-        //     //         url: "CMR_pgsqlAPI.php",
-        //     //         //dataType: 'json',
-        //     //         data: {
-        //     //             functionname: 'getGeoCMRToAjax',
-        //     //             paPoint: myPoint
-        //     //         },
-        //     //         success: function(result, status, erro) {
-        //     //             // alert("test", result)
-        //     //         },
-        //     //         error: function(req, status, error) {
-        //     //             alert(req + " " + status + " " + error);
-        //     //         }
-        //     //     });
-        //     //     //*/
-        //     // });
-        // };
+        initialize_map(format, map, mapLat, mapLng, mapDefaultZoom, valueSearch);
     </script>
     <script src="main.js"></script>
+
 </body>
 
 </html>

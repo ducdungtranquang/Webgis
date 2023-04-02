@@ -42,7 +42,7 @@
             </div>
 
         </div>
-                <div class="light">
+        <div class="light">
             <img src="./—Pngtree—yellow creative bulb team idea_3847872.png" alt="">
         </div>
         <div class="treasure-chest">
@@ -79,7 +79,9 @@
     //closeDB($myPDO);
     ?>
     <script type="module">
-        import {initialize_map} from './query.js'
+        import {
+            initialize_map
+        } from './query.js'
         var format = 'image/png';
         var map;
         var minX = 102.107955932617;
@@ -91,10 +93,8 @@
         var mapLat = cenY;
         var mapLng = cenX;
         var mapDefaultZoom = 6;
-        
-        initialize_map(format, map, mapLat, mapLng, mapDefaultZoom );
 
-       
+        initialize_map(format, map, mapLat, mapLng, mapDefaultZoom);
     </script>
     <script src="main.js"></script>
 </body>
