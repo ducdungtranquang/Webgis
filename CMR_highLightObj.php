@@ -42,21 +42,71 @@
             </div>
         </div>
     </div>
-
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Open Modal</button>
-
-    <!-- The Modal -->
     <div id="myModal" class="modal">
 
+<!-- Modal content -->
+<div class="modal-content">
+    <p class="instruct">Hướng dẫn chơi</p>
+    <p class="instruct-conten">
+        1. Xác định khu vực cụ thể bạn muốn tìm kiếm bí kíp, có thể là một thành phố, một tỉnh hoặc một khu vực
+        nhất định. <br />
+
+        2. Sử dụng chức năng tìm kiếm để nhập tên xã/phường hoặc tên tỉnh/thành phố vào ô tìm kiếm.<br />
+
+        3. Khi tìm thấy vị trí đúng, bạn có thể phóng to bản đồ để xác định vị trí chính xác hơn.<br />
+
+        4. Khi đã tìm được bí kíp, bạn có thể giấu nó bằng cách click vào rương bên dưới và viết một câu chuyện
+        dài
+        và hấp dẫn để thúc đẩy người khác tìm kiếm bí kíp của bạn. Hãy đảm bảo giữ bí kíp ở vị trí an toàn và
+        không để lộ cho người khác biết.<br />
+    </p>
+</div>
+<div id="modalPassword" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+    <p class="instruct">Hướng dẫn chơi</p>
+    <p class="instruct-conten">
+        xin vui lòng cài mật khẩu
+    </p>
+    <div class="input-group">
+        <input id="password" type="Password" class="form-control rounded" placeholder="Password"
+            aria-label="Password" aria-describedby="search-addon" />
+        <button id="savePass" type="button" class="btn btn-outline-primary">Save</button>
+    </div>
+</div>
+
+</div>
+<div id="modalEnterPass" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+    <p class="instruct">Hướng dẫn chơi</p>
+    <p class="instruct-conten">
+        xin vui lòng nhập mật khẩu
+    </p>
+    <div class="input-group">
+        <input id="enterPassword" type="Password" class="form-control rounded" placeholder="Password"
+            aria-label="Password" aria-describedby="search-addon" />
+        <button id="sendPass" type="button" class="btn btn-outline-primary">Save</button>
+    </div>
+</div>
+
+</div>
+<div id="modalBiKip" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <p class="instruct">Bí Kíp</p>
+            <p class="instruct-conten">
+               quyển 1
+            </p>
+            <p class="instruct-conten">
+                quyển 2
+             </p>
         </div>
 
     </div>
-    </div>
+</div>
     <?php include 'CMR_pgsqlAPI.php' ?>
     <?php
     //$myPDO = initDB();

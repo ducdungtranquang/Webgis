@@ -1,27 +1,51 @@
-var modal = document.getElementById("myModal");
+const chest = document.querySelector(".treasure-chest");
+const light = document.querySelector(".light");
+// console.log(light)
+const modal = document.getElementById("myModal");
+const modalPassword = document.getElementById("modalPassword");
+const inputpass = document.getElementById("password");
+const savePass = document.getElementById("savePass");
+const modalEnterPass = document.getElementById("modalEnterPass");
+const enterPassword = document.getElementById("enterPassword");
+const sendPass = document.getElementById("sendPass");
+const modalBiKip = document.getElementById("modalBiKip");
+chest.addEventListener("click", () => {
+  const password = localStorage.getItem("password");
+  if (!password) {
+    modalPassword.style.display = " block";
+  } else {
+    modalEnterPass.style.display = " block";
+  }
+});
+savePass.addEventListener("click", () => {
+  if (inputpass.value.length > 1) {
+    modalPassword.style.display = " none";
+    localStorage.setItem("password", inputpass.value);
+  }
+});
+sendPass.addEventListener("click", () => {
+  const password = localStorage.getItem("password");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+  console.log("heni", enterPassword.value);
+  console.log("heni1", password);
+  if (enterPassword.value === password) {
+    modalEnterPass.style.display = "none";
+    modalBiKip.style.display = "block";
+  }
+});
+light.addEventListener("click", () => {
+  modal.style.display = "block";
+});
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-};
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+window.onclick = function (event) {
+  if (event.target == modal || event.target == modalPassword || event.target == modalEnterPass || event.target == modalBiKip) {
     modal.style.display = "none";
+    modalPassword.style.display = " none";
+    modalEnterPass.style.display = "none";
+    modalBiKip.style.display = "none";
+  }
 };
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-};
 const mapELement = document.querySelector("#map");
 const toolTip = document.querySelector(".tool_tip");
 
