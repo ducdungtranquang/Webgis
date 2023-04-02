@@ -1,7 +1,8 @@
 const chest = document.querySelector(".treasure-chest");
 const light = document.querySelector(".light");
 // console.log(light)
-const modal = document.getElementById("myModal");
+const modal = document.getElementById("myModal1");
+const md = document.getElementById("myModal");
 const modalPassword = document.getElementById("modalPassword");
 const inputpass = document.getElementById("password");
 const savePass = document.getElementById("savePass");
@@ -9,6 +10,7 @@ const modalEnterPass = document.getElementById("modalEnterPass");
 const enterPassword = document.getElementById("enterPassword");
 const sendPass = document.getElementById("sendPass");
 const modalBiKip = document.getElementById("modalBiKip");
+const mdS = document.querySelector('#area');
 chest.addEventListener("click", () => {
   const password = localStorage.getItem("password");
   if (!password) {
@@ -25,12 +27,19 @@ savePass.addEventListener("click", () => {
 });
 sendPass.addEventListener("click", () => {
   const password = localStorage.getItem("password");
+  const bikip = localStorage.getItem("findBiKip");
 
   console.log("heni", enterPassword.value);
   console.log("heni1", password);
-  if (enterPassword.value === password) {
+  if (enterPassword.value === password && bikip) {
     modalEnterPass.style.display = "none";
     modalBiKip.style.display = "block";
+  }
+  else if(enterPassword.value !== password){
+    alert("Nhập sai mật khẩu");
+  }
+  else{
+    alert("Đại hiệp chưa tìm được bí kíp")
   }
 });
 light.addEventListener("click", () => {
@@ -38,11 +47,13 @@ light.addEventListener("click", () => {
 });
 
 window.onclick = function (event) {
-  if (event.target == modal || event.target == modalPassword || event.target == modalEnterPass || event.target == modalBiKip) {
+  if (event.target == modal || event.target == modalPassword || event.target == modalEnterPass || event.target == modalBiKip || event.target == md || event.target == mdS) {
     modal.style.display = "none";
     modalPassword.style.display = " none";
     modalEnterPass.style.display = "none";
     modalBiKip.style.display = "none";
+    md.style.display = "none";
+    mdS.style.display = "none";
   }
 };
 
@@ -61,3 +72,4 @@ mapELement.addEventListener("mousemove", e => {
 mapELement.addEventListener('mouseleave', () => {
     toolTip.classList.add("hide_tool_tips");
 })
+

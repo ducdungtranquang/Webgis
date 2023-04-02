@@ -105,7 +105,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 60%;
-            min-height:200px ;
+            min-height: 200px;
             /* Could be more or less, depending on screen size */
         }
 
@@ -179,7 +179,13 @@ left: 50%; */
 
         .instruct-conten {
             font-weight: 500;
-            font-size:24px;
+            font-size: 24px;
+        }
+
+        .name_p{
+            text-align: center;
+            margin: auto;
+            font-size: 30px;
         }
     </style>
     <!-- <script src="http://localhost:8081/libs/jquery/jquery-3.4.1.min.js" type="text/javascript"></script> -->
@@ -191,8 +197,8 @@ left: 50%; */
         <div class="ban-do-app" style=" border: 3px solid black;
         border-radius: 5px;">
             <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" class="btn btn-outline-primary">search</button>
+                <input type="search" class="form-control rounded input_search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <button type="button" class="btn btn-outline-primary search_btn">search</button>
             </div>
 
             <div class="ban-do" style="position: relative;">
@@ -211,23 +217,26 @@ left: 50%; */
             <img src="./—Pngtree—golden brown shiny treasure chest_6042838.png" alt="">
         </div>
     </div>
+
     <div id="myModal" class="modal">
+        <div class="modal-content md0">
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
             <p class="instruct">Hướng dẫn chơi</p>
             <p class="instruct-conten">
-                1. Xác định khu vực cụ thể bạn muốn tìm kiếm bí kíp, có thể là một thành phố, một tỉnh hoặc một khu vực
+                1. Xác định khu vực cụ thể bạn muốn tìm kiếm bí kíp, theo thứ tự thành phố/tỉnh -> quận/huyện
                 nhất định. <br />
 
                 2. Sử dụng chức năng tìm kiếm để nhập tên xã/phường hoặc tên tỉnh/thành phố vào ô tìm kiếm.<br />
 
-                3. Khi tìm thấy vị trí đúng, bạn có thể phóng to bản đồ để xác định vị trí chính xác hơn.<br />
+                3. Khi tìm thấy vị trí không đúng, bạn sẽ nhận được gợi ý và bạn phải chọn lại.<br />
 
-                4. Khi đã tìm được bí kíp, bạn có thể giấu nó bằng cách click vào rương bên dưới và viết một câu chuyện
-                dài
-                và hấp dẫn để thúc đẩy người khác tìm kiếm bí kíp của bạn. Hãy đảm bảo giữ bí kíp ở vị trí an toàn và
-                không để lộ cho người khác biết.<br />
+                4. Khi đã tìm được bí kíp, bạn có thể tìm nó bằng cách click vào rương bên dưới, tạo và nhập mật khẩu để xem nhanh.<br />
             </p>
         </div>
 
@@ -236,7 +245,7 @@ left: 50%; */
 
         <!-- Modal content -->
         <div class="modal-content">
-            <p class="instruct">Hướng dẫn chơi</p>
+            <p class="instruct">Bí kíp</p>
             <p class="instruct-conten">
                 xin vui lòng cài mật khẩu
             </p>
@@ -251,7 +260,7 @@ left: 50%; */
 
         <!-- Modal content -->
         <div class="modal-content">
-            <p class="instruct">Hướng dẫn chơi</p>
+            <p class="instruct">Bí kíp</p>
             <p class="instruct-conten">
                 xin vui lòng nhập mật khẩu
             </p>
@@ -269,14 +278,12 @@ left: 50%; */
             <p class="instruct-conten">
                 quyển 1
             </p>
-            <p class="instruct-conten">
-                quyển 2
-            </p>
+            <a href="https://www.youtube.com/watch?v=Gta5-ELJtoQ" target="_blank">Link bí kíp</a>
         </div>
 
     </div>
 
-    <?php include 'CMR_pgsqlAPI.php' ?>
+    <?php include 'Gs_pgsqlAPI.php' ?>
     <?php
     //$myPDO = initDB();
     //$mySRID = '4326';
@@ -293,22 +300,19 @@ left: 50%; */
         import {
             initialize_map,
             valueSearch,
-            handleSearch
+            handleSearch,
+            checkLocationDistric,
+            checkLocationCity,
         } from './query.js'
-        var format = 'image/png';
-        var map;
-        var minX = 102.107955932617;
-        var minY = 8.30629730224609;
-        var maxX = 109.505798339844;
-        var maxY = 23.4677505493164;
-        var cenX = (minX + maxX) / 2;
-        var cenY = (minY + maxY) / 2;
-        var mapLat = cenY;
-        var mapLng = cenX;
-        var mapDefaultZoom = 6;
         const location = "tp";
 
-        initialize_map(format, map, mapLat, mapLng, mapDefaultZoom, valueSearch);
+        const searchInput = document.querySelector(".search_btn");
+
+        searchInput.addEventListener("click", (e) => {
+            handleSearch(document.querySelector(".input_search"), location)
+        });
+//format, map, mapLat, mapLng, mapDefaultZoom, valueSearch
+        initialize_map(location);
     </script>
     <script src="main.js"></script>
 

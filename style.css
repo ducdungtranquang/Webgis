@@ -120,8 +120,6 @@ body {
     color: #fefefe;
     padding: 12px;
     border-radius: 3px;
-    /* top: 10px;
-left: 50%; */
 }
 
 .tooltip:hover .tooltiptext {
