@@ -1,0 +1,133 @@
+
+body {
+    font-family: 'Dancing Script', cursive;
+    background-image: url("./Screen\ Shot\ 2023-03-31\ at\ 09.50.54.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.app {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.header {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80px;
+    text-align: center;
+    color: rgb(124, 124, 17);
+    font-weight: 700;
+    background: rgba(255, 255, 255, .55);
+    /* border-radius: 8px; */
+    box-shadow: 0px 10px rgba(0, 0, 0, .2);
+    margin-top: 10px;
+}
+
+.ban-do {
+    height: 60vh;
+    background-color: white;
+    box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, .2);
+}
+
+.ban-do-app {
+    width: 60%;
+    background-color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.input-group {
+    height: 30px;
+}
+
+.input-group input {
+    font-size: 24px;
+
+}
+
+.input-group button {
+    font-size: 30px;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+}
+
+#map :hover {
+    cursor: pointer;
+}
+
+.tool_tip {
+    position: absolute;
+    z-index: 100;
+    display: block;
+    background-color: #000;
+    color: #fefefe;
+    padding: 12px;
+    border-radius: 3px;
+    /* top: 10px;
+left: 50%; */
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.hide_tool_tips {
+    display: none;
+}
