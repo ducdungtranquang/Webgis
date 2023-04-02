@@ -40,7 +40,15 @@
                     <div>Y: <span class="coordinateY"></span></div>
                 </div>
             </div>
+
         </div>
+                <div class="light">
+            <img src="./—Pngtree—yellow creative bulb team idea_3847872.png" alt="">
+        </div>
+        <div class="treasure-chest">
+            <img src="./—Pngtree—golden brown shiny treasure chest_6042838.png" alt="">
+        </div>
+
     </div>
 
     <!-- Trigger/Open The Modal -->
